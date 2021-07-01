@@ -1,0 +1,18 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - command: trunk serve
+    prebuild: trunk build # Prebuild app so running trunk-serve would be much faster
+
+ports:
+  - port: 8080
+    onOpen: open-preview
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    
