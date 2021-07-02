@@ -3,7 +3,7 @@ image:
 
 tasks:
   - name: Rebuild WASM client
-    command: cd app && trunk watch
+    command: trunk watch
     init: cd app && trunk build # Prebuild app so running trunk-serve would be much faster
   - name: Rebuild server
     command: cargo watch -x run # Rocket server
