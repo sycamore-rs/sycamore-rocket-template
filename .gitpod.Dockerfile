@@ -12,7 +12,7 @@ RUN bash -cl "sudo mv ./wasm-bindgen-0.2.74-x86_64-unknown-linux-musl/wasm-bindg
 # Install cargo-watch
 RUN bash -cl "wget https://github.com/watchexec/cargo-watch/releases/download/v7.7.2/cargo-watch-v7.7.2-x86_64-unknown-linux-gnu.tar.xz \
     && tar -xf cargo-watch-v7.7.2-x86_64-unknown-linux-gnu.tar.xz"
-RUN bash -cl "sudo mv ./cargo-watch-v7.7.2-x86_64-unknown-linux-gnu.tar.xz/cargo-watch ~/.cargo/bin"
+RUN bash -cl "sudo mv ./cargo-watch-v7.7.2-x86_64-unknown-linux-gnu/cargo-watch ~/.cargo/bin"
 
 # Install wasm32-unknown-unknown target
 RUN rustup target add wasm32-unknown-unknown
