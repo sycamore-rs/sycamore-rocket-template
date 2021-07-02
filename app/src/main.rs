@@ -13,5 +13,8 @@ fn main() {
         .unwrap()
         .unwrap();
 
-    hydrate_to(|| template! { App() }, &root);
+    // FIXME
+    root.set_text_content(Some(""));
+
+    hydrate_to(|| template! { App(None) }, &root);
 }

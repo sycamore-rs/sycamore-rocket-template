@@ -1,39 +1,44 @@
 use sycamore::prelude::*;
-use wasm_bindgen::JsCast;
-use web_sys::{Event, HtmlInputElement};
+use sycamore_router::{BrowserRouter, Route, StaticRouter};
 
-#[component(App<G>)]
-pub fn app() -> Template<G> {
-    let name = Signal::new(String::new());
+#[derive(Route)]
+pub enum AppRoutes {
+    #[to("/")]
+    Index,
+    #[to("/about")]
+    About,
+    #[not_found]
+    NotFound,
+}
 
-    let displayed_name = cloned!((name) => move || {
-        if name.get().is_empty() {
-            "World".to_string()
-        } else {
-            name.get().as_ref().clone()
-        }
-    });
-
-    let handle_change = move |event: Event| {
-        name.set(
-            event
-                .target()
-                .unwrap()
-                .dyn_into::<HtmlInputElement>()
-                .unwrap()
-                .value(),
-        );
-    };
-
-    template! {
-        div {
-            h1 {
-                "Hello "
-                (displayed_name())
-                "!"
+fn switch<G: GenericNode>(route: AppRoutes) -> Template<G> {
+    match route {
+        AppRoutes::Index => template! {
+            div {
+                "Hello Sycamore!"
+                br
+                a(href="/about") { "About" }
             }
+        },
+        AppRoutes::About => template! {
+            "This is the about page. Not much to see here."
+        },
+        AppRoutes::NotFound => template! {
+            "404 Not Found"
+        },
+    }
+}
 
-            input(placeholder="What is your name?", on:input=handle_change)
-        }
+/// # Props
+/// * `pathname` - Set to `Some(_)` if running on the server.
+#[component(App<G>)]
+pub fn app(pathname: Option<String>) -> Template<G> {
+    match pathname {
+        Some(pathname) => template! {
+            StaticRouter((pathname, switch))
+        },
+        None => template! {
+            BrowserRouter(switch)
+        },
     }
 }
