@@ -3,7 +3,7 @@ image:
 
 tasks:
   - command: cd app && trunk watch # WASM build
-    command: cargo run # Rocket server
+    command: cargo watch -x run # Rocket server
     prebuild: cd app && trunk build # Prebuild app so running trunk-serve would be much faster
 
 ports:
