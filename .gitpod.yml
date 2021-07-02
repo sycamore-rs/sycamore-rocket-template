@@ -2,9 +2,12 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - command: cd app && trunk watch # WASM build
+  - name: Rebuild WASM client
+    command: cd app && trunk watch
+    init: cd app && trunk build # Prebuild app so running trunk-serve would be much faster
+  - name: Rebuild server
     command: cargo watch -x run # Rocket server
-    prebuild: cd app && trunk build # Prebuild app so running trunk-serve would be much faster
+    openMode: split-right
 
 ports:
   - port: 8000
