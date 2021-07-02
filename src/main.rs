@@ -1,48 +1,27 @@
-#![allow(non_snake_case)]
+use std::io;
 
+use rocket::{fs::FileServer, get, launch, response, routes, tokio::fs};
 use sycamore::prelude::*;
-use wasm_bindgen::JsCast;
-use web_sys::{Event, HtmlInputElement};
 
-#[component(App<G>)]
-fn app() -> Template<G> {
-    let name = Signal::new(String::new());
+#[get("/")]
+async fn index() -> io::Result<response::content::Html<String>> {
+    let index_html = String::from_utf8(fs::read("app/dist/index.html").await?)
+        .expect("index.html should be valid utf-8");
 
-    let displayed_name = cloned!((name) => move || {
-        if name.get().is_empty() {
-            "World".to_string()
-        } else {
-            name.get().as_ref().clone()
+    let rendered = render_to_string(|| {
+        template! {
+            app::App()
         }
     });
 
-    let handle_change = move |event: Event| {
-        name.set(
-            event
-                .target()
-                .unwrap()
-                .dyn_into::<HtmlInputElement>()
-                .unwrap()
-                .value(),
-        );
-    };
+    let index_html = index_html.replace("%sycamore.body", &rendered);
 
-    template! {
-        div {
-            h1 {
-                "Hello "
-                (displayed_name())
-                "!"
-            }
-
-            input(placeholder="What is your name?", on:input=handle_change)
-        }
-    }
+    Ok(response::content::Html(index_html))
 }
 
-fn main() {
-    console_error_panic_hook::set_once();
-    console_log::init_with_level(log::Level::Debug).unwrap();
-
-    render(|| template! { App() });
+#[launch]
+fn rocket() -> _ {
+    rocket::build()
+        .mount("/", routes![index])
+        .mount("/", FileServer::from("app/dist"))
 }

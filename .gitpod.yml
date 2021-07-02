@@ -2,11 +2,12 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - command: trunk serve
-    prebuild: trunk build # Prebuild app so running trunk-serve would be much faster
+  - command: cd app && trunk watch # WASM build
+    command: cargo run # Rocket server
+    prebuild: cd app && trunk build # Prebuild app so running trunk-serve would be much faster
 
 ports:
-  - port: 8080
+  - port: 8000
     onOpen: open-preview
 
 github:
