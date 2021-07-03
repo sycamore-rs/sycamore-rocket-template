@@ -1,5 +1,6 @@
 use std::{io, path::PathBuf};
 
+use rocket::fs::Options;
 use rocket::{fs::FileServer, get, launch, response, routes, tokio::fs};
 use sycamore::prelude::*;
 
@@ -22,9 +23,14 @@ async fn index(path: PathBuf) -> io::Result<response::content::Html<String>> {
     Ok(response::content::Html(index_html))
 }
 
+#[get("/favicon.ico")]
+fn favicon() -> Option<()> {
+    None
+}
+
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![index])
-        .mount("/static/", FileServer::from("app/dist").rank(1))
+        .mount("/", routes![index, favicon])
+        .mount("/", FileServer::new("app/dist", Options::None).rank(1))
 }

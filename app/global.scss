@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+        Helvetica Neue, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    column-gap: 8px;
+
+    padding: 4px 15px;
+    margin: 0 0 4px 0;
+    background-color: rgb(233, 233, 233);
+
+    a {
+        color: #333;
+
+        padding: 6px;
+        border-radius: 4px;
+        transition-duration: 250ms;
+
+        &:hover {
+            background-color: rgb(219, 219, 219);
+        }
+    }
+}
+
+// Index page
+.index {
+    h1,
+    p {
+        text-align: center;
+    }
+
+    .cover-img {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto 4px auto;
+        display: block;
+    }
+}
+
+// Counter page
+.counters {
+    margin-top: 40px;
+    text-align: center;
+
+    button {
+        width: 50px;
+        height: 50px;
+        border-radius: 4px;
+        border: none;
+
+        font-size: 15pt;
+        transition-duration: 250ms;
+
+        background-color: rgb(233, 233, 233);
+        &:hover {
+            background-color: rgb(219, 219, 219);
+        }
+
+        &.increment:hover {
+            transform: translateY(-3px);
+        }
+        &.decrement:hover {
+            transform: translateY(-3px);
+        }
+    }
+
+    .value {
+        display: inline-block;
+        text-align: center;
+
+        min-width: 70px;
+        font-size: 17pt;
+    }
+}
