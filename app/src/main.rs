@@ -13,8 +13,5 @@ fn main() {
         .unwrap()
         .unwrap();
 
-    // FIXME
-    root.set_text_content(Some(""));
-
-    hydrate_to(|| template! { App(None) }, &root);
+    sycamore::hydrate_to(|| template! { App(None) }, &root);
 }

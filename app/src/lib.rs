@@ -1,6 +1,7 @@
 mod counter;
 mod index;
 mod nav;
+mod post;
 
 use sycamore::prelude::*;
 use sycamore_router::{BrowserRouter, Route, StaticRouter};
@@ -12,7 +13,9 @@ pub enum AppRoutes {
     #[to("/counter")]
     Counter,
     #[to("/blog")]
-    Blog,
+    PostsList,
+    #[to("/blog/<path>")]
+    Post { path: String },
     #[not_found]
     NotFound,
 }
@@ -21,15 +24,18 @@ fn switch<G: GenericNode>(route: AppRoutes) -> Template<G> {
     template! {
         div {
             nav::Nav()
-            (match route {
+            (match &route {
                 AppRoutes::Index => template! {
                     index::Index()
                 },
                 AppRoutes::Counter => template! {
                     counter::Counter()
                 },
-                AppRoutes::Blog => template! {
-                    "This is the blog page. Not much to see here."
+                AppRoutes::PostsList => template! {
+                    post::PostsList()
+                },
+                AppRoutes::Post { path } => template! {
+                    post::Post(path.clone())
                 },
                 AppRoutes::NotFound => template! {
                     "404 Not Found"
