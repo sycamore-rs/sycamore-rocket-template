@@ -259,9 +259,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.97"
+version = "0.2.98"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "12b8adadd720df158f4d70dfe7ccc6adb0472d7c55ca83445f6a5ab3e36f8fb6"
+checksum = "320cfe77175da3a483efed4bc0adc1968ca050b098ce4f2f1c13a56626128790"
 
 [[package]]
 name = "log"
@@ -419,6 +419,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f173ac3d1a7e3b28003f40de0b5ce7fe2710f9b9dc3fc38664cebee46b3b6527"
 
 [[package]]
+name = "smallvec"
+version = "1.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fe0f37c9e8f3c5a4a66ad655a93c74daac4ad00c441533bf5c6e7990bb42604e"
+
+[[package]]
 name = "static_assertions"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -426,11 +432,14 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 
 [[package]]
 name = "sycamore"
-version = "0.5.0-beta.1"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9870ca801d5a92562dbc06bb0148c2ddb3d1127ea753abb7872d5063f4a6c303"
 dependencies = [
  "chrono",
  "indexmap",
  "js-sys",
+ "smallvec",
  "sycamore-macro",
  "wasm-bindgen",
  "web-sys",
@@ -438,7 +447,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-macro"
-version = "0.5.0-beta.1"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "03839201087c16ce78e4cce0f1bc587f55b663cf334a46a48d8225aa9974f80d"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -447,7 +458,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-router"
-version = "0.5.0-beta.1"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bd15c7be1e2c61069f4b020e34ef385b84fcf8e14c3fb8aa36d92c94864d3ed3"
 dependencies = [
  "sycamore",
  "sycamore-router-macro",
@@ -457,7 +470,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-router-macro"
-version = "0.5.0-beta.1"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5a245e0b5d6d27fe65443ecbfc1abd57669a28de6deb4aa9ef1231210e8b52b5"
 dependencies = [
  "nom",
  "proc-macro2",
@@ -484,18 +499,18 @@ checksum = "55937e1799185b12863d447f42597ed69d9928686b8d88a1df17376a097d8369"
 
 [[package]]
 name = "thiserror"
-version = "1.0.25"
+version = "1.0.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fa6f76457f59514c7eeb4e59d891395fab0b2fd1d40723ae737d64153392e9c6"
+checksum = "93119e4feac1cbe6c798c34d3a53ea0026b0b1de6a120deef895137c0529bfe2"
 dependencies = [
  "thiserror-impl",
 ]
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.25"
+version = "1.0.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8a36768c0fbf1bb15eca10defa29526bda730a2376c2ab4393ccfa16fb1a318d"
+checksum = "060d69a0afe7796bf42e9e2ff91f5ee691fb15c53d38b4b62a9a53eb23164745"
 dependencies = [
  "proc-macro2",
  "quote",
