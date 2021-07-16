@@ -2,7 +2,7 @@
 
 This is template for [Sycamore](https://github.com/sycamore-rs/sycamore) + [Rocket](https://rocket.rs) + [Trunk](https://trunkrs.dev/) on [gitpod.io](https://www.gitpod.io).
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/sycamore-rs/sycamore-rocket)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/sycamore-rs/sycamore-rocket-template)
 
 ## Usage
 
