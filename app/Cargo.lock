@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "anyhow"
-version = "1.0.41"
+version = "1.0.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "15af2628f6890fe2609a3b91bef4c83450512802e59489f9c1cb1fa5df064a61"
+checksum = "595d3cfa7a60d4555cb5067b99f07142a08ea778de5cf993f7b75c7d8fabc486"
 
 [[package]]
 name = "app"
@@ -432,9 +432,9 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 
 [[package]]
 name = "sycamore"
-version = "0.5.1"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9870ca801d5a92562dbc06bb0148c2ddb3d1127ea753abb7872d5063f4a6c303"
+checksum = "d7e7b80a870c344ec63aafd28735199cb936f24589daea834ff65edf25a49104"
 dependencies = [
  "chrono",
  "indexmap",
@@ -447,9 +447,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-macro"
-version = "0.5.1"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "03839201087c16ce78e4cce0f1bc587f55b663cf334a46a48d8225aa9974f80d"
+checksum = "cba0f47f2c4f02924ee52c79563dcd95d737afff3ab4d6ff0b8bb08762c3bf04"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -458,9 +458,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-router"
-version = "0.5.1"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bd15c7be1e2c61069f4b020e34ef385b84fcf8e14c3fb8aa36d92c94864d3ed3"
+checksum = "fdfe64ef0d129a4bd13a3064bd71c66d8b0b81653bf434c6afc6057bf38a96fd"
 dependencies = [
  "sycamore",
  "sycamore-router-macro",
@@ -470,9 +470,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-router-macro"
-version = "0.5.1"
+version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5a245e0b5d6d27fe65443ecbfc1abd57669a28de6deb4aa9ef1231210e8b52b5"
+checksum = "e2ac276b2971eba61a511ba462a0840d267d5641675e70d2a4d6ecbbf19ecd79"
 dependencies = [
  "nom",
  "proc-macro2",
