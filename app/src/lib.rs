@@ -4,9 +4,11 @@ mod nav;
 mod post;
 
 use sycamore::prelude::*;
-use sycamore_router::{BrowserRouter, Route, StaticRouter};
+use sycamore_router::{
+    HistoryIntegration, Route, Router, RouterProps, StaticRouter, StaticRouterProps,
+};
 
-#[derive(Route)]
+#[derive(Route, Clone)]
 pub enum AppRoutes {
     #[to("/")]
     Index,
@@ -20,11 +22,11 @@ pub enum AppRoutes {
     NotFound,
 }
 
-fn switch<G: GenericNode>(route: AppRoutes) -> Template<G> {
+fn switch<G: GenericNode>(route: StateHandle<AppRoutes>) -> Template<G> {
     template! {
         div {
             nav::Nav()
-            (match &route {
+            (match route.get().as_ref() {
                 AppRoutes::Index => template! {
                     index::Index()
                 },
@@ -50,11 +52,14 @@ fn switch<G: GenericNode>(route: AppRoutes) -> Template<G> {
 #[component(App<G>)]
 pub fn app(pathname: Option<String>) -> Template<G> {
     match pathname {
-        Some(pathname) => template! {
-            StaticRouter((pathname, switch))
-        },
+        Some(pathname) => {
+            let route = AppRoutes::match_path(&pathname);
+            template! {
+                StaticRouter(StaticRouterProps::new(route, |route: AppRoutes| switch(Signal::new(route).handle())))
+            }
+        }
         None => template! {
-            BrowserRouter(switch)
+            Router(RouterProps::new(HistoryIntegration::new(), switch))
         },
     }
 }
