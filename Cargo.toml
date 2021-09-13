@@ -10,4 +10,4 @@ version = "0.1.0"
 app = {path = "./app"}
 pulldown-cmark = "0.8.0"
 rocket = "0.5.0-rc.1"
-sycamore = { version = "0.5.2", features = ["ssr"] }
+sycamore = { version = "0.6.0", features = ["ssr"] }
