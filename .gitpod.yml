@@ -12,6 +12,7 @@ tasks:
 ports:
   - port: 8000
     onOpen: ignore
+    visibility: public
 
 github:
   prebuilds:
