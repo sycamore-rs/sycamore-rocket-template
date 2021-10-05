@@ -1,7 +1,7 @@
 FROM gitpod/workspace-full
 
 # Install trunk
-RUN bash -cl "wget -qO- https://github.com/thedodd/trunk/releases/download/v0.13.1/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-"
+RUN bash -cl "wget -qO- https://github.com/thedodd/trunk/releases/download/v0.14.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-"
 RUN bash -cl "sudo mv ./trunk /usr/bin/"
 
 # Install cargo-watch
