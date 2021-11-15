@@ -20,7 +20,7 @@ async fn index(path: Segments<'_, Path>) -> io::Result<response::content::Html<S
     }
 
     let rendered = sycamore::render_to_string(|| {
-        template! {
+        view! {
             app::App(Some(pathname))
         }
     });

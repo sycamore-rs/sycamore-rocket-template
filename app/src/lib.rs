@@ -22,24 +22,24 @@ pub enum AppRoutes {
     NotFound,
 }
 
-fn switch<G: GenericNode>(route: StateHandle<AppRoutes>) -> Template<G> {
-    template! {
+fn switch<G: Html>(route: ReadSignal<AppRoutes>) -> View<G> {
+    view! {
         div {
             nav::Nav()
             (match route.get().as_ref() {
-                AppRoutes::Index => template! {
+                AppRoutes::Index => view! {
                     index::Index()
                 },
-                AppRoutes::Counter => template! {
+                AppRoutes::Counter => view! {
                     counter::Counter()
                 },
-                AppRoutes::PostsList => template! {
+                AppRoutes::PostsList => view! {
                     post::PostsList()
                 },
-                AppRoutes::Post { path } => template! {
+                AppRoutes::Post { path } => view! {
                     post::Post(path.clone())
                 },
-                AppRoutes::NotFound => template! {
+                AppRoutes::NotFound => view! {
                     "404 Not Found"
                 },
             })
@@ -50,15 +50,15 @@ fn switch<G: GenericNode>(route: StateHandle<AppRoutes>) -> Template<G> {
 /// # Props
 /// * `pathname` - Set to `Some(_)` if running on the server.
 #[component(App<G>)]
-pub fn app(pathname: Option<String>) -> Template<G> {
+pub fn app(pathname: Option<String>) -> View<G> {
     match pathname {
         Some(pathname) => {
             let route = AppRoutes::match_path(&pathname);
-            template! {
+            view! {
                 StaticRouter(StaticRouterProps::new(route, |route: AppRoutes| switch(Signal::new(route).handle())))
             }
         }
-        None => template! {
+        None => view! {
             Router(RouterProps::new(HistoryIntegration::new(), switch))
         },
     }

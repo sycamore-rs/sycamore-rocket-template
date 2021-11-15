@@ -3,12 +3,13 @@ use std::any::TypeId;
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
+use sycamore::futures::spawn_local_in_scope;
 use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::spawn_local;
 use web_sys::Element;
 
 #[component(PostsList<G>)]
-pub fn posts_list() -> Template<G> {
+pub fn posts_list() -> View<G> {
     if TypeId::of::<G>() == TypeId::of::<DomNode>() {
         #[derive(Debug, Clone, Serialize, Deserialize)]
         struct PostData {
@@ -21,7 +22,7 @@ pub fn posts_list() -> Template<G> {
         }
         let post_list = Signal::new(None::<PostList>);
 
-        spawn_local(cloned!((post_list) => async move {
+        spawn_local_in_scope(cloned!((post_list) => async move {
             let resp = Request::get(&format!("/posts")).send().await.unwrap();
             post_list.set(Some(resp.json().await.expect("cannot parse post list")))
         }));
@@ -30,38 +31,38 @@ pub fn posts_list() -> Template<G> {
             log::info!("{:?}", post_list);
         }));
 
-        template! {
+        view! {
             (if let Some(post_list) = post_list.get().as_ref() {
                 let templates = post_list.posts.iter().cloned().map(|post| {
                     let PostData { title, path } = post;
-                    template! {
+                    view! {
                         li {
                             a(href=format!("/blog/{}", path)) { (title) }
                         }
                     }
                 }).collect();
-                let templates = Template::new_fragment(templates);
-                template! {
+                let templates = View::new_fragment(templates);
+                view! {
                     ul {
                         (templates)
                     }
                 }
             }
             else {
-                template! {
+                view! {
                     "Loading..."
                 }
             })
         }
     } else {
-        template! {
+        view! {
             "Loading..."
         }
     }
 }
 
 #[component(Post<G>)]
-pub fn post(path: String) -> Template<G> {
+pub fn post(path: String) -> View<G> {
     if TypeId::of::<G>() == TypeId::of::<DomNode>() {
         let html = Signal::new(String::new());
 
@@ -81,11 +82,11 @@ pub fn post(path: String) -> Template<G> {
             }));
         }));
 
-        template! {
+        view! {
             div(class="container", ref=container_ref)
         }
     } else {
-        template! {
+        view! {
             "Loading..."
         }
     }

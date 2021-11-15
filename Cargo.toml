@@ -7,7 +7,9 @@ version = "0.1.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-app = {path = "./app"}
+app = { path = "./app" }
 pulldown-cmark = "0.8.0"
 rocket = "0.5.0-rc.1"
-sycamore = { version = "0.6.1", features = ["ssr"] }
+sycamore = { git = "https://github.com/sycamore-rs/sycamore", rev = "d3ad6de", features = [
+    "ssr",
+] }

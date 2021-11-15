@@ -12,8 +12,11 @@ console_log = "0.2.0"
 log = "0.4.14"
 reqwasm = "0.2.1"
 serde = { version = "1.0.130", features = ["derive"] }
-sycamore = "0.6.1"
-sycamore-router = "0.6.1"
+sycamore = { git = "https://github.com/sycamore-rs/sycamore", rev = "d3ad6de", features = [
+    "ssr",
+    "futures",
+] }
+sycamore-router = { git = "https://github.com/sycamore-rs/sycamore", rev = "d3ad6de" }
 wasm-bindgen = "0.2.78"
 wasm-bindgen-futures = "0.4.28"
 

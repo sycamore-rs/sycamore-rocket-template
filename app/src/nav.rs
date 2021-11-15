@@ -1,8 +1,8 @@
 use sycamore::prelude::*;
 
 #[component(Nav<G>)]
-pub fn nav() -> Template<G> {
-    template! {
+pub fn nav() -> View<G> {
+    view! {
         nav {
             a(href="/") { "Home" }
             a(href="/counter") { "Counter" }
