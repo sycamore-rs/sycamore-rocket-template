@@ -24,9 +24,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.48"
+version = "1.0.51"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "62e1f47f7dc0422027a4e370dd4548d4d66b26782e513e98dca1e689e058a80e"
+checksum = "8b26702f315f53b6071259e15dd9d64528213b44d61de1ec926eca7715d62203"
 
 [[package]]
 name = "app"
@@ -228,9 +228,9 @@ checksum = "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457"
 
 [[package]]
 name = "encoding_rs"
-version = "0.8.29"
+version = "0.8.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a74ea89a0a1b98f6332de42c95baff457ada66d1cb4030f9ff151b2041a1c746"
+checksum = "7896dc8abb250ffdda33912550faa54c88ec8b998dec0b2c55ab224921ce11df"
 dependencies = [
  "cfg-if",
 ]
@@ -385,9 +385,9 @@ checksum = "9b919933a397b79c37e33b77bb2aa3dc8eb6e165ad809e58ff75bc7db2e34574"
 
 [[package]]
 name = "h2"
-version = "0.3.7"
+version = "0.3.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7fd819562fcebdac5afc5c113c3ec36f902840b70fd4fc458799c8ce4607ae55"
+checksum = "8d09bbc040ce3758a0d32a8a910562104a853aea429dbe1a998beb065c2eacb2"
 dependencies = [
  "bytes",
  "fnv",
@@ -606,9 +606,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.108"
+version = "0.2.109"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8521a1b57e76b1ec69af7599e75e38e7b7fad6610f037db8c79b127201b5d119"
+checksum = "f98a04dce437184842841303488f70d0188c5f51437d2a834dc097eafa909a01"
 
 [[package]]
 name = "lock_api"
@@ -630,9 +630,9 @@ dependencies = [
 
 [[package]]
 name = "loom"
-version = "0.5.3"
+version = "0.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5df2c4aeb432e60c9e5ae517ca8ed8b63556ce23093b2758fc8837d75439c5ec"
+checksum = "edc5c7d328e32cc4954e8e01193d7f0ef5ab257b5090b70a964e099a36034309"
 dependencies = [
  "cfg-if",
  "generator",
@@ -834,9 +834,9 @@ checksum = "dbf0c48bc1d91375ae5c3cd81e3722dff1abcf81a30960240640d223f59fe0e5"
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.32"
+version = "1.0.33"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba508cc11742c0dc5c1659771673afbab7a0efab23aa17e854cbab0837ed0b43"
+checksum = "fb37d2df5df740e582f28f8560cf425f52bb267d872fe58358eadb554909f07a"
 dependencies = [
  "unicode-xid",
 ]
@@ -1087,15 +1087,15 @@ dependencies = [
 
 [[package]]
 name = "rustversion"
-version = "1.0.5"
+version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61b3909d758bb75c79f23d4736fac9433868679d3ad2ea7a61e3c25cfda9a088"
+checksum = "f2cc38e8fa666e2de3c4aba7edeb5ffc5246c1c2ed0e3d17e560aeeba736b23f"
 
 [[package]]
 name = "ryu"
-version = "1.0.5"
+version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "71d301d4193d031abdd79ff7e3dd721168a9572ef3fe51a1517aba235bd8f86e"
+checksum = "3c9613b5a66ab9ba26415184cfc41156594925a9cf3a2057e57f31ff145f6568"
 
 [[package]]
 name = "scoped-tls"
@@ -1301,8 +1301,9 @@ checksum = "213701ba3370744dcd1a12960caa4843b3d68b4d1c0a5d575e0d65b2ee9d16c0"
 
 [[package]]
 name = "sycamore"
-version = "0.6.3"
-source = "git+https://github.com/sycamore-rs/sycamore?rev=9f9163b#9f9163b73bbeec59c5f687acda27b259ec18e647"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fbff2c313c75b52785b39fcd508807c1d7e5372a8a9d319e381ebdf68ee9f1c3"
 dependencies = [
  "ahash",
  "html-escape",
@@ -1321,8 +1322,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-macro"
-version = "0.6.3"
-source = "git+https://github.com/sycamore-rs/sycamore?rev=9f9163b#9f9163b73bbeec59c5f687acda27b259ec18e647"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d0f2b42f470ceafe6939660cb79545f907978e8d6a0c4ac3c146c332dd391aa7"
 dependencies = [
  "once_cell",
  "proc-macro2",
@@ -1332,8 +1334,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-reactive"
-version = "0.6.3"
-source = "git+https://github.com/sycamore-rs/sycamore?rev=9f9163b#9f9163b73bbeec59c5f687acda27b259ec18e647"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "96cf29f9778a127db8c5940e7e1439a84b73b607baa4f3ea35e7c2f773e77386"
 dependencies = [
  "ahash",
  "indexmap",
@@ -1344,8 +1347,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-router"
-version = "0.6.3"
-source = "git+https://github.com/sycamore-rs/sycamore?rev=9f9163b#9f9163b73bbeec59c5f687acda27b259ec18e647"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1ddfc4dfea85f709c855d901023b38aa53816d7e9b40c93f265eda4f850d8113"
 dependencies = [
  "sycamore",
  "sycamore-router-macro",
@@ -1355,8 +1359,9 @@ dependencies = [
 
 [[package]]
 name = "sycamore-router-macro"
-version = "0.6.3"
-source = "git+https://github.com/sycamore-rs/sycamore?rev=9f9163b#9f9163b73bbeec59c5f687acda27b259ec18e647"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b61ab6c834158bfc2cc28f1163084f5f75fc533e76473e793204100224d907ea"
 dependencies = [
  "nom",
  "proc-macro2",
@@ -1572,9 +1577,9 @@ dependencies = [
 
 [[package]]
 name = "tracing-subscriber"
-version = "0.3.2"
+version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7507ec620f809cdf07cccb5bc57b13069a88031b795efd4079b1c71b66c1613d"
+checksum = "245da694cc7fc4729f3f418b304cb57789f1bed2a78c575407ab8a23f53cb4d3"
 dependencies = [
  "ansi_term",
  "lazy_static",
