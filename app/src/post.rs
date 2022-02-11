@@ -2,14 +2,12 @@ use std::any::TypeId;
 
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
-use sycamore::prelude::*;
-use sycamore::futures::spawn_local_in_scope;
+use sycamore::{prelude::*, futures::ScopeSpawnFuture};
 use wasm_bindgen::JsCast;
-use wasm_bindgen_futures::spawn_local;
 use web_sys::Element;
 
-#[component(PostsList<G>)]
-pub fn posts_list() -> View<G> {
+#[component]
+pub fn PostList<G: Html>(ctx: ScopeRef) -> View<G> {
     if TypeId::of::<G>() == TypeId::of::<DomNode>() {
         #[derive(Debug, Clone, Serialize, Deserialize)]
         struct PostData {
@@ -20,73 +18,73 @@ pub fn posts_list() -> View<G> {
         struct PostList {
             posts: Vec<PostData>,
         }
-        let post_list = Signal::new(None::<PostList>);
+        let post_list = ctx.create_signal(None::<PostList>);
 
-        spawn_local_in_scope(cloned!((post_list) => async move {
+        ctx.spawn_future(async move {
             let resp = Request::get(&format!("/posts")).send().await.unwrap();
             post_list.set(Some(resp.json().await.expect("cannot parse post list")))
-        }));
+        });
 
-        create_effect(cloned!((post_list) => move || {
+        ctx.create_effect(move || {
             log::info!("{:?}", post_list);
-        }));
+        });
 
-        view! {
+        view! { ctx,
             (if let Some(post_list) = post_list.get().as_ref() {
                 let templates = post_list.posts.iter().cloned().map(|post| {
                     let PostData { title, path } = post;
-                    view! {
+                    view! { ctx,
                         li {
                             a(href=format!("/blog/{}", path)) { (title) }
                         }
                     }
                 }).collect();
                 let templates = View::new_fragment(templates);
-                view! {
+                view! { ctx,
                     ul {
                         (templates)
                     }
                 }
             }
             else {
-                view! {
+                view! { ctx,
                     "Loading..."
                 }
             })
         }
     } else {
-        view! {
+        view! { ctx,
             "Loading..."
         }
     }
 }
 
-#[component(Post<G>)]
-pub fn post(path: String) -> View<G> {
-    if TypeId::of::<G>() == TypeId::of::<DomNode>() {
-        let html = Signal::new(String::new());
+#[component]
+pub fn Post<G: Html>(ctx: ScopeRef, path: String) -> View<G> {
+    if G::IS_BROWSER {
+        let html = ctx.create_signal(String::new());
 
-        let container_ref = NodeRef::new();
+        let container_ref = ctx.create_node_ref();
 
-        spawn_local(cloned!((container_ref, html) => async move {
+        ctx.spawn_future(async move {
             let resp = Request::get(&format!("/posts/{}", path)).send().await.unwrap();
             html.set(resp.text().await.unwrap());
 
-            create_effect(cloned!((container_ref, html) => move || {
+            ctx.create_effect(|| {
                 if let Some(dom_node) = container_ref.try_get::<DomNode>() {
                     dom_node
                         .inner_element()
                         .unchecked_into::<Element>()
                         .set_inner_html(html.get().as_str());
                 }
-            }));
-        }));
+            });
+        });
 
-        view! {
+        view! { ctx,
             div(class="container", ref=container_ref)
         }
     } else {
-        view! {
+        view! { ctx,
             "Loading..."
         }
     }

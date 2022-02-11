@@ -19,8 +19,8 @@ async fn index(path: Segments<'_, Path>) -> io::Result<response::content::Html<S
         pathname += "/";
     }
 
-    let rendered = sycamore::render_to_string(|| {
-        view! {
+    let rendered = sycamore::render_to_string(|ctx| {
+        view! { ctx,
             app::App(Some(pathname))
         }
     });

@@ -1,6 +1,6 @@
 [package]
 authors = [""]
-edition = "2018"
+edition = "2021"
 name = "app"
 version = "0.1.0"
 
@@ -12,10 +12,9 @@ console_log = "0.2.0"
 log = "0.4.14"
 reqwasm = "0.2.1"
 serde = { version = "1.0.130", features = ["derive"] }
-sycamore = { version = "0.7.1", features = ["experimental-hydrate", "futures"] }
-sycamore-router = "0.7.1"
+sycamore = { version = "0.8.0-beta.2", features = ["experimental-hydrate", "suspense"] }
+sycamore-router = "0.8.0-beta.2"
 wasm-bindgen = "0.2.78"
-wasm-bindgen-futures = "0.4.28"
 
 [dependencies.web-sys]
 features = ["HtmlInputElement", "InputEvent"]
