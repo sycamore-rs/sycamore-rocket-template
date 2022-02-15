@@ -5,15 +5,9 @@ use serde::{Deserialize, Serialize};
 use sycamore::{prelude::*, futures::ScopeSpawnFuture};
 use wasm_bindgen::JsCast;
 use web_sys::Element;
-use log::debug;
-
-fn print_type_of<T>(_: &T) {
-    debug!("{}", std::any::type_name::<T>())
-}
 
 #[component]
 pub fn PostList<G: Html>(ctx: ScopeRef) -> View<G> {
-    debug!("Type G: {}", std::any::type_name::<G>());
 
     if TypeId::of::<G>() == TypeId::of::<HydrateNode>() {
         #[derive(Debug, Clone, Serialize, Deserialize)]
