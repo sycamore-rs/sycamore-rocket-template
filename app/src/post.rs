@@ -1,14 +1,12 @@
-use std::any::TypeId;
-
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
 use sycamore::{prelude::*, futures::ScopeSpawnFuture};
 use wasm_bindgen::JsCast;
 use web_sys::Element;
+use log::debug;
 
 #[component]
 pub fn PostList<G: Html>(ctx: ScopeRef) -> View<G> {
-    if TypeId::of::<G>() == TypeId::of::<DomNode>() {
         #[derive(Debug, Clone, Serialize, Deserialize)]
         struct PostData {
             title: String,
@@ -48,15 +46,14 @@ pub fn PostList<G: Html>(ctx: ScopeRef) -> View<G> {
             }
             else {
                 view! { ctx,
-                    "Loading..."
+                    "Loading... PostData"
                 }
             })
         }
-    } else {
-        view! { ctx,
-            "Loading..."
-        }
-    }
+}
+
+fn print_type_of<T>(_: &T) {
+    debug!("{}", std::any::type_name::<T>())
 }
 
 #[component]
@@ -68,16 +65,24 @@ pub fn Post<G: Html>(ctx: ScopeRef, path: String) -> View<G> {
 
         ctx.spawn_future(async move {
             let resp = Request::get(&format!("/posts/{}", path)).send().await.unwrap();
+            debug!("Request::get resp : {:?}", resp);
+
             html.set(resp.text().await.unwrap());
 
-            ctx.create_effect(|| {
-                if let Some(dom_node) = container_ref.try_get::<DomNode>() {
+            ctx.create_effect(on([html], || {
+                debug!("container_ref: {:?}", container_ref.try_get_raw());
+                print_type_of(&container_ref.get_raw());
+                
+                if let Some(dom_node) = container_ref.try_get::<HydrateNode>() {
+
                     dom_node
                         .inner_element()
                         .unchecked_into::<Element>()
                         .set_inner_html(html.get().as_str());
+                }else{
+                    debug!("no HydrateNode");
                 }
-            });
+            }));
         });
 
         view! { ctx,
