@@ -8,7 +8,8 @@ use web_sys::Element;
 
 #[component]
 pub fn PostList<G: Html>(ctx: ScopeRef) -> View<G> {
-    if TypeId::of::<G>() == TypeId::of::<DomNode>() {
+
+    if TypeId::of::<G>() == TypeId::of::<HydrateNode>() {
         #[derive(Debug, Clone, Serialize, Deserialize)]
         struct PostData {
             title: String,
@@ -71,7 +72,7 @@ pub fn Post<G: Html>(ctx: ScopeRef, path: String) -> View<G> {
             html.set(resp.text().await.unwrap());
 
             ctx.create_effect(|| {
-                if let Some(dom_node) = container_ref.try_get::<DomNode>() {
+                if let Some(dom_node) = container_ref.try_get::<HydrateNode>() {
                     dom_node
                         .inner_element()
                         .unchecked_into::<Element>()
