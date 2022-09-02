@@ -6,7 +6,7 @@ tasks:
     command: trunk watch
     init: cd app && trunk build # Prebuild app so running trunk-serve would be much faster
   - name: Rebuild server
-    command: cargo watch -x run # Rocket server
+    command: cargo watch -x run -p server # Rocket server
     openMode: split-right
 
 ports:

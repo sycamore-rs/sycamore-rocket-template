@@ -1,8 +1,8 @@
 use sycamore::prelude::*;
 
 #[component]
-pub fn Nav<G: Html>(ctx: ScopeRef) -> View<G> {
-    view! { ctx,
+pub fn Nav<G: Html>(cx: Scope) -> View<G> {
+    view! { cx,
         nav {
             a(href="/") { "Home" }
             a(href="/counter") { "Counter" }

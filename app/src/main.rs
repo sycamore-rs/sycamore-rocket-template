@@ -13,5 +13,5 @@ fn main() {
         .unwrap()
         .unwrap();
 
-    sycamore::hydrate_to(|ctx| view! { ctx, App(None) }, &root);
+    sycamore::hydrate_to(|cx| view! { cx, App(None) }, &root);
 }

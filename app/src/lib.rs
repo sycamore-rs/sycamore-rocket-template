@@ -1,11 +1,11 @@
+#![allow(non_snake_case)]
 mod counter;
 mod index;
 mod nav;
 mod post;
 
 use sycamore::prelude::*;
-use sycamore_router::{HistoryIntegration, Route, Router, StaticRouter,
-};
+use sycamore_router::{HistoryIntegration, Route, Router, StaticRouter};
 
 #[derive(Route, Clone)]
 pub enum AppRoutes {
@@ -16,29 +16,31 @@ pub enum AppRoutes {
     #[to("/blog")]
     PostsList,
     #[to("/blog/<path>")]
-    Post { path: String },
+    Post {
+        path: String
+    },
     #[not_found]
     NotFound,
 }
 
-fn switch<'a, G: Html>(ctx: ScopeRef<'a>, route: &'a ReadSignal<AppRoutes>) -> View<G> {
-    view! { ctx,
+fn switch<'a, G: Html>(cx: Scope<'a>, route: &'a ReadSignal<AppRoutes>) -> View<G> {
+    view! { cx,
         div {
             nav::Nav()
             (match route.get().as_ref() {
-                AppRoutes::Index => view! { ctx,
+                AppRoutes::Index => view! { cx,
                     index::Index()
                 },
-                AppRoutes::Counter => view! { ctx,
+                AppRoutes::Counter => view! { cx,
                     counter::Counter()
                 },
-                AppRoutes::PostsList => view! { ctx,
+                AppRoutes::PostsList => view! { cx,
                     post::PostList()
                 },
-                AppRoutes::Post { path } => view! { ctx,
+                AppRoutes::Post { path } => view! { cx,
                     post::Post(path.clone())
                 },
-                AppRoutes::NotFound => view! { ctx,
+                AppRoutes::NotFound => view! { cx,
                     "404 Not Found"
                 },
             })
@@ -49,22 +51,22 @@ fn switch<'a, G: Html>(ctx: ScopeRef<'a>, route: &'a ReadSignal<AppRoutes>) -> V
 /// # Props
 /// * `pathname` - Set to `Some(_)` if running on the server.
 #[component]
-pub fn App<G: Html>(ctx: ScopeRef, pathname: Option<String>) -> View<G> {
+pub fn App<G: Html>(cx: Scope, pathname: Option<String>) -> View<G> {
     match pathname {
         Some(pathname) => {
-            let route = AppRoutes::match_path(&pathname);
-            view! { ctx,
-                StaticRouter {
-                    view: switch,
-                    route: route,
-                }
+            let route = AppRoutes::default().match_path(&pathname);
+            view! { cx,
+                StaticRouter(
+                    view=switch,
+                    route=route,
+                )
             }
         }
-        None => view! { ctx,
-            Router {
-                view: switch,
-                integration: HistoryIntegration::new(),
-            }
+        None => view! { cx,
+            Router(
+                view=switch,
+                integration=HistoryIntegration::new(),
+            )
         },
     }
 }
