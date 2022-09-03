@@ -1,13 +1,13 @@
 use sycamore::prelude::*;
 
 #[component]
-pub fn Counter<G: Html>(ctx: ScopeRef) -> View<G> {
-    let counter = ctx.create_signal(0);
+pub fn Counter<G: Html>(cx: Scope) -> View<G> {
+    let counter = create_signal(cx, 0);
 
     let decrement = |_| counter.set(*counter.get() - 1);
     let increment = |_| counter.set(*counter.get() + 1);
 
-    view! { ctx,
+    view! { cx,
         div(class="counters") {
             button(class="decrement", on:click=decrement) { "-" }
             span(class="value") { (counter.get()) }

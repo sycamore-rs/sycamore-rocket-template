@@ -14,7 +14,7 @@ Just click on the button above to start a workspace. Trunk will automatically be
 
 If you are using this template on your local machine, use the following command to start the Rocket server.
 ```bash
-cargo watch -x run # Or cargo run
+cargo watch -x run -p server # Or cargo run -p server
 ```
 And this command to automatically rebuild the client.
 ```bash

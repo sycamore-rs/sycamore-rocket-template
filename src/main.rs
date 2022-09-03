@@ -9,7 +9,7 @@ use rocket::{fs::FileServer, get, launch, response, routes, tokio::fs};
 use sycamore::prelude::*;
 
 #[get("/<path..>", rank = 2)]
-async fn index(path: Segments<'_, Path>) -> io::Result<response::content::Html<String>> {
+async fn index(path: Segments<'_, Path>) -> io::Result<response::content::RawHtml<String>> {
     let index_html = String::from_utf8(fs::read("app/dist/index.html").await?)
         .expect("app/dist/index.html should be valid utf-8");
 
@@ -19,15 +19,15 @@ async fn index(path: Segments<'_, Path>) -> io::Result<response::content::Html<S
         pathname += "/";
     }
 
-    let rendered = sycamore::render_to_string(|ctx| {
-        view! { ctx,
+    let rendered = sycamore::render_to_string(|cx| {
+        view! { cx,
             app::App(Some(pathname))
         }
     });
 
     let index_html = index_html.replace("%sycamore.body", &rendered);
 
-    Ok(response::content::Html(index_html))
+    Ok(response::content::RawHtml(index_html))
 }
 
 #[get("/favicon.ico")]
